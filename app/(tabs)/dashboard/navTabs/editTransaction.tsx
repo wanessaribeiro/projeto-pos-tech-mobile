@@ -7,8 +7,7 @@ import React from 'react';
 import { Image, StyleSheet, TextInput} from 'react-native';
 import { Text, View } from "react-native";
 
-export default function NewTransaction() {
-  
+export default function EditTransaction() {
   const [transactionType, onChangeTransactionType] = React.useState('Selecione o tipo de transação');
   const [value, onChangeValue] = React.useState('');
   const dropdownContent: dataDropdown[] = [
@@ -22,7 +21,7 @@ export default function NewTransaction() {
         <View style={containers.grayContainer}>
           <Image source={require('@/assets/images/Pixels3.png')} style={imagePlacement.imageLeft}/>
           <Image source={require('@/assets/images/Pixels4.png')} style={imagePlacement.imageRight}/>
-            <Text style={styles.title}>Nova Transação</Text>
+            <Text style={styles.title}>Editar Transação</Text>
             <DropdownComponent placeholderDropdown='Selecione o tipo de transação' data={dropdownContent}/>
           <Text style={styles.text}>Valor</Text>
           <TextInput

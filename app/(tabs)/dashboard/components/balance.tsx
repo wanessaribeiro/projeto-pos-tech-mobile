@@ -2,11 +2,20 @@ import { Colors } from '@/constants/colors';
 import { Fonts } from '@/constants/fonts';
 import { imagePlacement } from '@/constants/styles';
 import { useNavProvider } from '@/contexts/navContext';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { useState } from 'react';
 import { Image, Pressable, StyleSheet} from 'react-native';
 import { Text, View } from "react-native";
 
 export default function Balance() {
   const {setOption} = useNavProvider();
+  const balanceValue = '1500,00'
+  const [isEyeClosed, setIsEyeClosed] = useState(false);
+  
+  const onPressBalance = () => {
+    const closeEye = !isEyeClosed
+    setIsEyeClosed(closeEye)
+  }
   
     return (
         <View style={styles.container}>
@@ -17,11 +26,25 @@ export default function Balance() {
             <Text style={styles.date}>Dia Semana, Data</Text>
           </View>
           <View style={styles.textContainerRight}>
-            <View style={styles.balanceDecor}> <Text style={styles.balanceText}>Saldo</Text></View>
+            <View style={styles.balanceDecor}> 
+              <Text style={styles.balanceText}>Saldo</Text>
+              <Pressable onPress={() => onPressBalance()} style={styles.iconButton}>
+                {isEyeClosed ? (
+                  <Ionicons name="eye-off" size={25} color={Colors.tertiary.medium} />
+                ) : (
+                  <Ionicons name="eye" size={25} color={Colors.tertiary.medium} />
+                )}
+              </Pressable> 
+            </View>
             <Text style={styles.accType}>Conta Corrente</Text>
-            <Text style={styles.balance}>R$ 1500,00</Text>
+            {isEyeClosed ? (
+                  <Text style={styles.balance}>R$ {balanceValue}</Text>
+                ) : (
+                  <Text style={styles.balance}>R$   {balanceValue.replace(/./g, '*')}</Text>
+            )}
+            
             <Pressable onPress={()=>{setOption('invoices')}}>
-              <Text style={styles.seeBalance}>Ver Extrato</Text>
+              <Text style={styles.seeInvoices}>Ver Extrato</Text>
             </Pressable>
           </View>
          </View>
@@ -53,7 +76,10 @@ const styles = StyleSheet.create({
   balanceDecor:{
     paddingBottom: 10,
     borderBottomWidth: 2,
-    borderBottomColor: Colors.tertiary.medium
+    borderBottomColor: Colors.tertiary.medium,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end'
   },
   title: {
     color: 'white',
@@ -79,10 +105,13 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: Fonts.size.large
   },
-  seeBalance: {
+  seeInvoices: {
     color: 'white',
     alignSelf: 'flex-end',
     fontWeight: 'bold',
     fontSize: Fonts.size.small
-  }
+  },
+  iconButton: {
+    paddingLeft: 18,
+  },
 });

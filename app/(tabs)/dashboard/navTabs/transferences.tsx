@@ -7,13 +7,13 @@ import React from 'react';
 import { Image, StyleSheet, TextInput} from 'react-native';
 import { Text, View } from "react-native";
 
-export default function OtherServices() {
+export default function Transferences() {
 
     return (
         <View style={containers.grayContainer}>
           <Image source={require('@/assets/images/Pixels3.png')} style={imagePlacement.imageLeft}/>
           <Image source={require('@/assets/images/Pixels4.png')} style={imagePlacement.imageRight}/>
-            <Text style={styles.title}>Outros Serviços</Text>
+            <Text style={styles.title}>Transferências</Text>
          </View>
     )
 }
