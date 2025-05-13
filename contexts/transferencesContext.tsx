@@ -1,4 +1,4 @@
-import { InvoiceType } from "@/constants/types";
+import { InvoiceType } from "@/libs/types";
 import { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
 
 const transferencesMock: InvoiceType[] = [

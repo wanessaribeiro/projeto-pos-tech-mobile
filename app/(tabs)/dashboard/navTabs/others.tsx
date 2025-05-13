@@ -1,8 +1,8 @@
 import ButtonApp from '@/components/button';
 import DropdownComponent, { dataDropdown } from '@/components/dropdown';
-import { Colors } from '@/constants/colors';
-import { Fonts } from '@/constants/fonts';
-import { containers, imagePlacement } from '@/constants/styles';
+import { Colors } from '@/libs/colors';
+import { Fonts } from '@/libs/fonts';
+import { containers, imagePlacement } from '@/libs/styles';
 import React from 'react';
 import { Image, StyleSheet, TextInput} from 'react-native';
 import { Text, View } from "react-native";

@@ -1,6 +1,6 @@
-import { Colors } from '@/constants/colors';
-import { transactionTypes } from '@/constants/enums';
-import { Fonts } from '@/constants/fonts';
+import { Colors } from '@/libs/colors';
+import { transactionTypes } from '@/libs/enums';
+import { Fonts } from '@/libs/fonts';
 import { useNavProvider } from '@/contexts/navContext';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';

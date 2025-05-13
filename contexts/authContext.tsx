@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { accountMock, AccountType } from "./AccountContext";
+import { accountMock, AccountType } from "./accountContext";
 
 export interface AuthType {
   email: string;

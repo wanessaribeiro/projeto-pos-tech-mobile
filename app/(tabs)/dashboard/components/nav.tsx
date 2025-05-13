@@ -1,5 +1,5 @@
-import { Colors } from '@/constants/colors';
-import { Fonts } from '@/constants/fonts';
+import { Colors } from '@/libs/colors';
+import { Fonts } from '@/libs/fonts';
 import { useNavProvider } from '@/contexts/navContext';
 import { Pressable, StyleSheet} from 'react-native';
 import { Text, View } from "react-native";

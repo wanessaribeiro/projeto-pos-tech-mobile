@@ -1,4 +1,4 @@
-import { Colors } from '@/constants/colors';
+import { Colors } from '@/libs/colors';
 import { StyleSheet} from 'react-native';
 import {  View } from "react-native";
 import Header from '@/app/(tabs)/dashboard/components/header';

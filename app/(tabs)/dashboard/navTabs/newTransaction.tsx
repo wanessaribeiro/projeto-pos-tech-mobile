@@ -1,16 +1,64 @@
 import ButtonApp from '@/components/button';
-import DropdownComponent, { dataDropdown } from '@/components/dropdown';
-import { Colors } from '@/constants/colors';
-import { Fonts } from '@/constants/fonts';
-import { containers, imagePlacement } from '@/constants/styles';
-import React from 'react';
+import DropdownComponent from '@/components/dropdown';
+import { Colors } from '@/libs/colors';
+import { Fonts } from '@/libs/fonts';
+import { containers, imagePlacement } from '@/libs/styles';
+import { dataDropdown, InvoiceType } from '@/libs/types';
+import { useAccountProvider } from '@/contexts/accountContext';
+import { useInvoiceProvider } from '@/contexts/invoiceContext';
+import { useTransferenceProvider } from '@/contexts/transferencesContext';
+import React, { useState } from 'react';
 import { Image, StyleSheet, TextInput} from 'react-native';
 import { Text, View } from "react-native";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function NewTransaction() {
-  
-  const [transactionType, onChangeTransactionType] = React.useState('Selecione o tipo de transação');
-  const [value, onChangeValue] = React.useState('');
+  const {usePostInvoice} = useInvoiceProvider();
+  const {balance, setBalance} = useAccountProvider();
+  const {usePostTransference} = useTransferenceProvider();
+  const [newInvoice, setNewInvoice] = useState({
+    id: '12', //TODO: voltar aleatorio aqui
+    type: "",
+    value: 0,
+    date: new Date(),
+  });
+
+  const onChangeType = (value: string) => {
+    setNewInvoice((prev) => ({ ...prev, type: value }));
+  };
+
+  const onChangeValue = (value: string) => {
+    if (!isNaN(Number(value))) {
+      setNewInvoice((prev) => ({ ...prev, value: Number(value) }));
+    }
+  };
+
+  const setNewBalance = (invoice: InvoiceType) => {
+    const currentBalance = balance;
+    
+    if (invoice.type === "Depósito") setBalance(currentBalance + invoice.value)
+    else if (invoice.type === "Saque" || newInvoice.type === "DOC/TED" || newInvoice.type === "Pix") setBalance(currentBalance - invoice.value);
+  };
+
+  const createInvoice = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!newInvoice.type || newInvoice.value === 0) {
+      alert("Por favor, preencha todos os campos corretamente.");
+      return;
+    }
+    if (newInvoice.type === "DOC/TED" || newInvoice.type === "Pix") {
+      usePostTransference(newInvoice);
+    }
+    usePostInvoice(newInvoice);
+    setNewBalance(newInvoice);
+    setNewInvoice({
+      id: uuidv4(),
+      type: "",
+      value: 0,
+      date: new Date(),
+    })
+  };
+
   const dropdownContent: dataDropdown[] = [
     {label: 'Depósito', value: 'Depósito'},
     {label: 'Saque', value: 'Saque'},
@@ -28,11 +76,12 @@ export default function NewTransaction() {
           <TextInput
             style={styles.input}
             onChangeText={onChangeValue}
-            value={value}
+            value={String(newInvoice.value)}
             placeholder="00,00"
             keyboardType="numeric"
+
           />
-            <ButtonApp title='Concluir Transação' type='primary'/>
+            <ButtonApp title='Concluir Transação' type='primary' onClick={() => createInvoice}/>
          </View>
     )
 }
@@ -61,3 +110,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
   },
 });
+
+function useForm<T>(): { register: any; handleSubmit: any; watch: any; formState: { errors: any; }; } {
+  throw new Error('Function not implemented.');
+}

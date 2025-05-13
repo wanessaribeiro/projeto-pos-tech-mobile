@@ -1,16 +1,21 @@
-import { Colors } from '@/constants/colors';
-import { Fonts } from '@/constants/fonts';
-import { imagePlacement } from '@/constants/styles';
+import { Colors } from '@/libs/colors';
+import { Fonts } from '@/libs/fonts';
+import { imagePlacement } from '@/libs/styles';
 import { useNavProvider } from '@/contexts/navContext';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from 'react';
 import { Image, Pressable, StyleSheet} from 'react-native';
 import { Text, View } from "react-native";
+import { formatDate } from '@/libs/sharedFunctions';
+import { daysOfTheWeek } from '@/libs/enums';
+import { useAccountProvider } from '@/contexts/accountContext';
 
 export default function Balance() {
   const {setOption} = useNavProvider();
-  const balanceValue = '1500,00'
+  const {account, balance} = useAccountProvider();
   const [isEyeClosed, setIsEyeClosed] = useState(false);
+  const dayWeek = daysOfTheWeek[new Date().getDay()];
+  const todaysDate = formatDate(new Date());
   
   const onPressBalance = () => {
     const closeEye = !isEyeClosed
@@ -22,8 +27,8 @@ export default function Balance() {
           <Image source={require('@/assets/images/Pixels1.png')} style={imagePlacement.imageLeft}/>
           <Image source={require('@/assets/images/Pixels2.png')} style={imagePlacement.imageRight}/>
           <View style={styles.textContainerLeft}>
-            <Text style={styles.title}>Olá, Cliente</Text>
-            <Text style={styles.date}>Dia Semana, Data</Text>
+            <Text style={styles.title}>Olá, {account.name}</Text>
+            <Text style={styles.date}>{`${dayWeek}, ${todaysDate}`}</Text>
           </View>
           <View style={styles.textContainerRight}>
             <View style={styles.balanceDecor}> 
@@ -36,11 +41,11 @@ export default function Balance() {
                 )}
               </Pressable> 
             </View>
-            <Text style={styles.accType}>Conta Corrente</Text>
+            <Text style={styles.accType}>{account.type}</Text>
             {isEyeClosed ? (
-                  <Text style={styles.balance}>R$ {balanceValue}</Text>
+                  <Text style={styles.balance}>R$ {balance}</Text>
                 ) : (
-                  <Text style={styles.balance}>R$   {balanceValue.replace(/./g, '*')}</Text>
+                  <Text style={styles.balance}>R$   {String(balance).replace(/./g, '*')}</Text>
             )}
             
             <Pressable onPress={()=>{setOption('invoices')}}>

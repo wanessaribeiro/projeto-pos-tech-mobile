@@ -4,4 +4,8 @@ export interface InvoiceType {
     value: number;
     date: Date;
   }
-  
+
+  export type dataDropdown = {
+    label: string,
+    value: string,
+}

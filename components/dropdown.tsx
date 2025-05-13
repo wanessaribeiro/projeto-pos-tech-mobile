@@ -2,13 +2,9 @@ import React, { useState } from 'react';
   import { StyleSheet, Text, View } from 'react-native';
   import { Dropdown } from 'react-native-element-dropdown';
   import AntDesign from '@expo/vector-icons/AntDesign';
-import { Colors } from '@/constants/colors';
-import { Fonts } from '@/constants/fonts';
-
-export type dataDropdown = {
-    label: string,
-    value: string
-}
+import { Colors } from '@/libs/colors';
+import { Fonts } from '@/libs/fonts';
+import { dataDropdown } from '@/libs/types';
 
   type DropdownComponentProps = {
     placeholderDropdown: string
