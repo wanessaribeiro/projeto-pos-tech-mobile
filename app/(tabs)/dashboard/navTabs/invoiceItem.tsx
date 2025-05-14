@@ -16,11 +16,16 @@ type InvoiceItemProps = {
 
 export default function InvoiceItem({invoice} : InvoiceItemProps) {
     const {setOption} = useNavProvider();
-    const {setSelectedInvoice} = useInvoiceProvider();
-    const onPressEdit = (value: InvoiceType) => {
+    const {setSelectedInvoice, useDeleteInvoice} = useInvoiceProvider();
+    const onPressEdit = () => {
         setSelectedInvoice(invoice);
         setOption('edit');
     }
+
+    const onPressDelete = () => {
+      useDeleteInvoice(invoice.id);
+    }
+
     return (
         <View style={styles.invoiceContainer}>
             <View style={styles.sectionContainer}> 
@@ -30,8 +35,8 @@ export default function InvoiceItem({invoice} : InvoiceItemProps) {
             <View style={styles.dateContainer}>
                 <Text style={styles.textDate}>{formatDate(invoice.date)}</Text>
                 <View style={styles.buttonGroup}>
-                    <Pressable onPress={() => onPressEdit(invoice) }style={styles.iconButton}><Ionicons name="pencil" size={18} color="white" /></Pressable>
-                    <Pressable style={styles.iconButton}><Ionicons name="trash" size={18} color="white" /></Pressable>
+                    <Pressable onPress={() => onPressEdit() }style={styles.iconButton}><Ionicons name="pencil" size={18} color="white" /></Pressable>
+                    <Pressable onPress={() => onPressDelete()} style={styles.iconButton}><Ionicons name="trash" size={18} color="white" /></Pressable>
                 </View>
             </View> 
          </View>

@@ -12,7 +12,7 @@ export default function Invoices() {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Extratos</Text>
-            <Text style={styles.textMonth}>Novembro</Text>
+            <Text style={styles.text}>Confira aqui suas transações</Text>
             {invoices?.map((invoice) => (
               <InvoiceItem invoice={invoice} key={invoice.id}/>
             ))}
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     fontSize: Fonts.size.h1,
     fontWeight: 'bold'
   },
-  textMonth: {
+  text: {
     color: Colors.secondary.medium,
     fontSize: Fonts.size.small,
     fontWeight: 'bold'
