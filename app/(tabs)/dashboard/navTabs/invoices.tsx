@@ -4,14 +4,18 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Text, View } from "react-native";
 import InvoiceItem from './invoiceItem';
+import { useInvoiceProvider } from '@/contexts/invoiceContext';
 
 export default function Invoices() {
+  const {invoices} = useInvoiceProvider();
+  
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Extratos</Text>
             <Text style={styles.textMonth}>Novembro</Text>
-            <InvoiceItem transactionType='deposit' transactionAmount={1005} transactionDate='12/05/2023'/>
-            <InvoiceItem transactionType='deposit' transactionAmount={1005} transactionDate='12/05/2023'/>
+            {invoices?.map((invoice) => (
+              <InvoiceItem invoice={invoice} key={invoice.id}/>
+            ))}
         </View>
     )
 }
@@ -28,7 +32,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     borderRadius: 8,
     padding: 30,
-    position: 'relative'
+    position: 'relative',
     },
   title: {
     color: 'black',

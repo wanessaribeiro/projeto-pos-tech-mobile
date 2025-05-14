@@ -1,6 +1,6 @@
 export interface InvoiceType {
     id: string;
-    type: string;
+    type: 'deposit' | 'withdraw' | 'pix' | 'docTed';
     value: number;
     date: Date;
   }

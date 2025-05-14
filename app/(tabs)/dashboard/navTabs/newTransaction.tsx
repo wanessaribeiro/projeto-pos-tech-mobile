@@ -10,20 +10,20 @@ import { useTransferenceProvider } from '@/contexts/transferencesContext';
 import React, { useState } from 'react';
 import { Image, StyleSheet, TextInput} from 'react-native';
 import { Text, View } from "react-native";
-import { v4 as uuidv4 } from 'uuid';
+import uuid from 'react-native-uuid';
 
 export default function NewTransaction() {
   const {usePostInvoice} = useInvoiceProvider();
   const {balance, setBalance} = useAccountProvider();
   const {usePostTransference} = useTransferenceProvider();
-  const [newInvoice, setNewInvoice] = useState({
-    id: '12', //TODO: voltar aleatorio aqui
-    type: "",
+  const [newInvoice, setNewInvoice] = useState<InvoiceType>({
+    id: uuid.v4(), //TODO: voltar aleatorio aqui
+    type: "pix",
     value: 0,
     date: new Date(),
   });
 
-  const onChangeType = (value: string) => {
+  const onChangeType = (value) => {
     setNewInvoice((prev) => ({ ...prev, type: value }));
   };
 
@@ -36,34 +36,33 @@ export default function NewTransaction() {
   const setNewBalance = (invoice: InvoiceType) => {
     const currentBalance = balance;
     
-    if (invoice.type === "Depósito") setBalance(currentBalance + invoice.value)
-    else if (invoice.type === "Saque" || newInvoice.type === "DOC/TED" || newInvoice.type === "Pix") setBalance(currentBalance - invoice.value);
+    if (invoice.type === "deposit") setBalance(currentBalance + invoice.value)
+    else if (invoice.type === "withdraw" || newInvoice.type === "docTed" || newInvoice.type === "pix") setBalance(currentBalance - invoice.value);
   };
 
-  const createInvoice = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const createInvoice = () => {
     if (!newInvoice.type || newInvoice.value === 0) {
       alert("Por favor, preencha todos os campos corretamente.");
       return;
     }
-    if (newInvoice.type === "DOC/TED" || newInvoice.type === "Pix") {
+    if (newInvoice.type === "docTed" || newInvoice.type === "pix") {
       usePostTransference(newInvoice);
     }
     usePostInvoice(newInvoice);
     setNewBalance(newInvoice);
     setNewInvoice({
-      id: uuidv4(),
-      type: "",
+      id: uuid.v4(),
+      type: "pix",
       value: 0,
       date: new Date(),
     })
   };
 
   const dropdownContent: dataDropdown[] = [
-    {label: 'Depósito', value: 'Depósito'},
-    {label: 'Saque', value: 'Saque'},
-    {label: 'Pix', value: 'Pix'},
-    {label: 'DOC/TED', value: 'DOC/TED'}
+    {label: 'Depósito', value: 'deposit'},
+    {label: 'Saque', value: 'withdraw'},
+    {label: 'Pix', value: 'pix'},
+    {label: 'DOC/TED', value: 'docTed'}
   ]
 
     return (
@@ -71,7 +70,7 @@ export default function NewTransaction() {
           <Image source={require('@/assets/images/Pixels3.png')} style={imagePlacement.imageLeft}/>
           <Image source={require('@/assets/images/Pixels4.png')} style={imagePlacement.imageRight}/>
             <Text style={styles.title}>Nova Transação</Text>
-            <DropdownComponent placeholderDropdown='Selecione o tipo de transação' data={dropdownContent}/>
+            <DropdownComponent placeholderDropdown='Selecione o tipo de transação' value={newInvoice.type} onChangeValue={onChangeType} data={dropdownContent}/>
           <Text style={styles.text}>Valor</Text>
           <TextInput
             style={styles.input}
@@ -81,7 +80,7 @@ export default function NewTransaction() {
             keyboardType="numeric"
 
           />
-            <ButtonApp title='Concluir Transação' type='primary' onClick={() => createInvoice}/>
+            <ButtonApp title='Concluir Transação' type='primary' onClick={() => createInvoice()}/>
          </View>
     )
 }
@@ -111,6 +110,3 @@ const styles = StyleSheet.create({
   },
 });
 
-function useForm<T>(): { register: any; handleSubmit: any; watch: any; formState: { errors: any; }; } {
-  throw new Error('Function not implemented.');
-}

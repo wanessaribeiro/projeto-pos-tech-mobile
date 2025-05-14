@@ -1,30 +1,19 @@
 import React, { useState } from 'react';
   import { StyleSheet, Text, View } from 'react-native';
   import { Dropdown } from 'react-native-element-dropdown';
-  import AntDesign from '@expo/vector-icons/AntDesign';
 import { Colors } from '@/libs/colors';
 import { Fonts } from '@/libs/fonts';
 import { dataDropdown } from '@/libs/types';
 
   type DropdownComponentProps = {
-    placeholderDropdown: string
+    placeholderDropdown: string,
+    value: string,
+    onChangeValue: (option: string) => void;
     data: dataDropdown[],
   }
 
-  const DropdownComponent = ({placeholderDropdown, data}: DropdownComponentProps) => {
-    const [value, setValue] = useState(null);
+  const DropdownComponent = ({placeholderDropdown, value, onChangeValue, data}: DropdownComponentProps) => {
     const [isFocus, setIsFocus] = useState(false);
-
-    const renderLabel = () => {
-      if (value || isFocus) {
-        return (
-          <Text style={[styles.label, isFocus && { color: Colors.primary.medium }]}>
-            Dropdown label
-          </Text>
-        );
-      }
-      return null;
-    };
 
     return (
       <View style={styles.container}>
@@ -43,7 +32,7 @@ import { dataDropdown } from '@/libs/types';
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
           onChange={item => {
-            setValue(item.value);
+            onChangeValue(item.value);
             setIsFocus(false);
           }}
         />

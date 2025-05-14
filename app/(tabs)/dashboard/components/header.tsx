@@ -3,12 +3,14 @@ import { Fonts } from '@/libs/fonts';
 import { StyleSheet} from 'react-native';
 import { Text, View } from "react-native";
 import Nav from './nav';
+import { useAccountProvider } from '@/contexts/accountContext';
 
 export default function Header() {
+    const {account} = useAccountProvider();
     return (
       <View style={styles.container}>
         <View style={styles.account}>
-            <Text style={styles.accountText}>Cliente da Silva</Text>
+            <Text style={styles.accountText}>{account.name}</Text>
          </View>
          <Nav/>
       </View>

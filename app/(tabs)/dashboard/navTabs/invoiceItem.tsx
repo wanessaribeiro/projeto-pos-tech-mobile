@@ -6,28 +6,31 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';
 import { Pressable, StyleSheet} from 'react-native';
 import { Text, View } from "react-native";
+import { formatDate } from '@/libs/sharedFunctions';
+import { InvoiceType } from '@/libs/types';
+import { useInvoiceProvider } from '@/contexts/invoiceContext';
 
 type InvoiceItemProps = {
-    transactionType: 'deposit' | 'withdraw' | 'pix' | 'docTed',
-    transactionAmount: number,
-    transactionDate: string,
+    invoice : InvoiceType
 }
 
-export default function InvoiceItem({transactionType, transactionAmount, transactionDate} : InvoiceItemProps) {
+export default function InvoiceItem({invoice} : InvoiceItemProps) {
     const {setOption} = useNavProvider();
-    const onPressEdit = (value: string) => {
-        setOption(value)
+    const {setSelectedInvoice} = useInvoiceProvider();
+    const onPressEdit = (value: InvoiceType) => {
+        setSelectedInvoice(invoice);
+        setOption('edit');
     }
     return (
         <View style={styles.invoiceContainer}>
             <View style={styles.sectionContainer}> 
-                <Text style={styles.text}>{transactionTypes[transactionType]}</Text>
-                <Text style={styles.textBold}>R$ {transactionAmount}</Text>
+                <Text style={styles.text}>{transactionTypes[invoice.type]}</Text>
+                <Text style={styles.textBold}>R$ {invoice.value}</Text>
             </View>
             <View style={styles.dateContainer}>
-                <Text style={styles.textDate}>{transactionDate}</Text>
+                <Text style={styles.textDate}>{formatDate(invoice.date)}</Text>
                 <View style={styles.buttonGroup}>
-                    <Pressable onPress={() => onPressEdit('edit') }style={styles.iconButton}><Ionicons name="pencil" size={18} color="white" /></Pressable>
+                    <Pressable onPress={() => onPressEdit(invoice) }style={styles.iconButton}><Ionicons name="pencil" size={18} color="white" /></Pressable>
                     <Pressable style={styles.iconButton}><Ionicons name="trash" size={18} color="white" /></Pressable>
                 </View>
             </View> 

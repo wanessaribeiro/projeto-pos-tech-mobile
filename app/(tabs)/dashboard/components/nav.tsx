@@ -21,7 +21,7 @@ export default function Nav() {
         <View style={styles.menu}>
             {menuContent.map((item, index) => {
                 return (
-                <Pressable style={option == item.value ? styles.selectedDecor : styles.unselectedDecor} onPress={()=>{onPressOption(item.value)}}>
+                <Pressable style={option == item.value ? styles.selectedDecor : styles.unselectedDecor} onPress={()=>{onPressOption(item.value)}} key={index}>
                     <Text style={option == item.value ? styles.selected : styles.menuText}>{item.label}</Text>
                 </Pressable>
                 )

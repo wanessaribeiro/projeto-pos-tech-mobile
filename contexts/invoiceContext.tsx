@@ -4,7 +4,7 @@ import { createContext, Dispatch, SetStateAction, useContext, useState } from "r
 const invoicesMock: InvoiceType[] = [
   {
     id: "4",
-    type: "Saque",
+    type: "withdraw",
     value: 600.0,
     date: new Date(
       "Sat Oct 19 2024 16:24:42 GMT-0300 (Hora padrão de Brasília)"
@@ -12,7 +12,7 @@ const invoicesMock: InvoiceType[] = [
   },
   {
     id: "3",
-    type: "Pix",
+    type: "pix",
     value: 250.0,
     date: new Date(
       "Sat Jun 01 2024 16:24:42 GMT-0300 (Hora padrão de Brasília)"
@@ -20,7 +20,7 @@ const invoicesMock: InvoiceType[] = [
   },
   {
     id: "2",
-    type: "DOC/TED",
+    type: "docTed",
     value: 300.0,
     date: new Date(
       "Mon Apr 08 2024 16:24:42 GMT-0300 (Hora padrão de Brasília)"
@@ -28,7 +28,7 @@ const invoicesMock: InvoiceType[] = [
   },
   {
     id: "1",
-    type: "Depósito",
+    type: "deposit",
     value: 300.0,
     date: new Date(
       "Mon Apr 01 2024 16:24:42 GMT-0300 (Hora padrão de Brasília)"
@@ -38,7 +38,7 @@ const invoicesMock: InvoiceType[] = [
 
 const InvoiceContext = createContext<{
   invoices: InvoiceType[],
-  selectedInvoice: InvoiceType | undefined,
+  selectedInvoice: InvoiceType,
   setSelectedInvoice: Dispatch<SetStateAction<InvoiceType>>,
   useGetInvoice: (id: string) => InvoiceType | undefined,
   usePostInvoice: (invoice: InvoiceType) => void,
@@ -51,7 +51,7 @@ export function InvoiceProvider({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const [invoices, setInvoices] = useState([...invoicesMock]);
-  const [selectedInvoice, setSelectedInvoice] = useState({id: "", type: "Saque", value: 0, date: new Date()});
+  const [selectedInvoice, setSelectedInvoice] = useState<InvoiceType>({id: "", type: 'pix', value: 0, date: new Date()});
 
   const useGetInvoice = (id: string) => {
     const invoice = invoicesMock.find((i) => i.id === id);
