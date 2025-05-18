@@ -43,9 +43,9 @@ export default function Balance() {
             </View>
             <Text style={styles.accType}>{account.type}</Text>
             {isEyeClosed ? (
-                  <Text style={styles.balance}>R$ {balance}</Text>
-                ) : (
                   <Text style={styles.balance}>R$   {String(balance).replace(/./g, '*')}</Text>
+                ) : (
+                  <Text style={styles.balance}>R$ {balance}</Text>
             )}
             
             <Pressable onPress={()=>{setOption('invoices')}}>
