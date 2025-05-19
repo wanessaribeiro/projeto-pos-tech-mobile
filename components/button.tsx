@@ -6,7 +6,7 @@ import { StyleSheet} from 'react-native';
 
 type ButtonAppProps = {
     title: string;
-    type: 'primary' | 'secondary';
+    type: 'primary' | 'secondary' | 'tertiary';
     onClick?: () => void
 }
 
@@ -15,11 +15,16 @@ export default function ButtonApp({title, type, onClick} : ButtonAppProps) {
         <View>
             {type == 'primary' ?(    
             <Pressable style={styles.primary} onPress={onClick}>
-                <Text style={styles.primaryText}>{title}</Text>
+                <Text style={styles.whiteText}>{title}</Text>
             </Pressable>) :
-            <Pressable style={styles.primary} onPress={onClick}>
-                <Text style={styles.primaryText}>{title}</Text>
-            </Pressable>}
+            type == 'secondary' ? (
+            <Pressable style={styles.secondary} onPress={onClick}>
+                <Text style={styles.whiteText}>{title}</Text>
+            </Pressable>) : (
+            <Pressable style={styles.tertiary} onPress={onClick}>
+                <Text style={styles.whiteText}>{title}</Text>
+            </Pressable>
+            )}
         </View>
     )
 }
@@ -31,9 +36,21 @@ export const styles = StyleSheet.create({
       paddingHorizontal: 20,
       borderRadius: 8,
     },
-    primaryText: {
+    whiteText: {
         color: 'white',
         fontSize: Fonts.size.small,
         fontWeight: 'bold'
-    }
+    },
+    secondary: {
+        backgroundColor: Colors.secondary.medium,
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        borderRadius: 8,
+    },
+    tertiary: {
+        backgroundColor: Colors.tertiary.medium,
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        borderRadius: 8,
+    },
   });

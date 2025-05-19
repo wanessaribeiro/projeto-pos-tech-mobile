@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
  container: {
     width: '90%',
     backgroundColor: 'white',
-    flex: 5,
+    flex: 5.5,
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     gap: 24,

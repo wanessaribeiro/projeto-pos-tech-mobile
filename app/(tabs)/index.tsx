@@ -5,6 +5,7 @@ import { AccountProvider } from "@/contexts/accountContext"
 import { AuthProvider } from "@/contexts/authContext"
 import { TransferenceProvider } from "@/contexts/transferencesContext"
 import { InvestmentProvider } from "@/contexts/investmentContext"
+import Home from "./login/home"
 
 
 
@@ -16,7 +17,7 @@ const HomePage = () => {
           <InvoiceProvider>                
             <TransferenceProvider>
               <InvestmentProvider>
-                <Dashboard/>
+                <Home/>
               </InvestmentProvider>
             </TransferenceProvider> 
           </InvoiceProvider>
