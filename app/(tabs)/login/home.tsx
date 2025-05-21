@@ -1,25 +1,29 @@
 import { Colors } from '@/libs/colors';
-import { Image, StyleSheet} from 'react-native';
-import {  Text, View } from "react-native";
-import ButtonApp from '@/components/button';
+import {StyleSheet} from 'react-native';
+import { View } from "react-native";
 import { Fonts } from '@/libs/fonts';
-import { imagePlacement } from '@/libs/styles';
 import FooterHome from './components/footer';
 import HeaderHome from './components/header';
+import HomeScreen from './navTabs/homeScreen';
+import ErrorScreen from './navTabs/errorScreen';
+import { useNavProvider } from '@/contexts/navContext';
+import Login from './navTabs/login';
+import CreateAccount from './navTabs/createAccount';
 
 export default function Home() {
+  const {option} = useNavProvider();
+  const menuContent: {[key: string]: React.JSX.Element} = {
+      'home': <HomeScreen/>,
+      'login': <Login/>,
+      'create-account': <CreateAccount/>,
+      'about': <ErrorScreen/>,
+      'services': <ErrorScreen/>
+  }
 
     return (
         <View style={styles.container}>
             <HeaderHome/>
-            <View style={styles.body}>
-                <Image source={require('@/assets/images/BannerImg.png')} style={styles.image}/>
-                <Image source={require('@/assets/images/Pixels1.png')} style={imagePlacement.imageLeft}/>
-
-                <Text style={styles.text}>Experimente mais liberdade no controle da sua vida financeira. </Text>
-                <Text style={styles.text}>Crie sua conta com a gente!</Text>
-                <ButtonApp title={'Quero abrir uma conta'} type={'tertiary'}/>
-            </View>
+              {menuContent[option]}
             <FooterHome/>
          </View>
     )

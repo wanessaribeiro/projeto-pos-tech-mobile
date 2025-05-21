@@ -1,17 +1,20 @@
 import { Colors } from '@/libs/colors';
 import { Fonts } from '@/libs/fonts';
-import { StyleSheet} from 'react-native';
+import { Pressable, StyleSheet} from 'react-native';
 import { Text, View } from "react-native";
 import NavHome from './navHome';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useNavProvider } from '@/contexts/navContext';
 
 export default function HeaderHome() {
+  const {setOption} = useNavProvider(); 
+
     return (
       <View style={styles.container}>
-        <View style={styles.title}>
+        <Pressable style={styles.title} onPress={() => setOption('home')}>
             <Ionicons name="aperture" size={30} color={Colors.secondary.medium}/>
             <Text style={styles.titleText}>ByteBank</Text>
-         </View>
+         </Pressable>
          <NavHome/>
       </View>
         

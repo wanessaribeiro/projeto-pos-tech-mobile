@@ -7,10 +7,10 @@ import { Text, View } from "react-native";
 export default function NavHome() {
     const {option, setOption} = useNavProvider();
     const menuContent = [
-        {label: 'Login', value: 'home'},
-        {label: 'Criar conta', value: 'transferences'},
-        {label: 'Sobre', value: 'investments'},
-        {label: 'Serviços', value: 'others'}
+        {label: 'Login', value: 'login'},
+        {label: 'Criar conta', value: 'create-account'},
+        {label: 'Sobre', value: 'about'},
+        {label: 'Serviços', value: 'services'}
     ]
 
     const onPressOption = (value: string) => {
