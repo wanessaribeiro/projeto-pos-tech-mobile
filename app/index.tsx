@@ -2,15 +2,23 @@ import { Colors } from '@/libs/colors';
 import {StyleSheet} from 'react-native';
 import { View } from "react-native";
 import { Fonts } from '@/libs/fonts';
-import FooterHome from './components/footer';
-import HeaderHome from './components/header';
-import HomeScreen from './navTabs/homeScreen';
-import ErrorScreen from './navTabs/errorScreen';
 import { useNavProvider } from '@/contexts/navContext';
-import Login from './navTabs/login';
-import CreateAccount from './navTabs/createAccount';
+import HeaderHome from '@/components/header';
+import FooterHome from '@/components/footer';
+import CreateAccount from '@/homeNavTabs/createAccount';
+import ErrorScreen from '@/homeNavTabs/errorScreen';
+import HomeScreen from '@/homeNavTabs/homeScreen';
+import Login from '@/homeNavTabs/login';
+import { useNavigation } from 'expo-router';
+import { useEffect } from 'react';
 
 export default function Home() {
+    const navigation = useNavigation();
+  
+    useEffect(() => {
+      navigation.setOptions({ headerShown: false });
+    }, [navigation]);
+    
   const {option} = useNavProvider();
   const menuContent: {[key: string]: React.JSX.Element} = {
       'home': <HomeScreen/>,
@@ -18,7 +26,7 @@ export default function Home() {
       'create-account': <CreateAccount/>,
       'about': <ErrorScreen/>,
       'services': <ErrorScreen/>
-  }
+  } 
 
     return (
         <View style={styles.container}>

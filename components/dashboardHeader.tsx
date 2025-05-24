@@ -1,16 +1,32 @@
 import { Colors } from '@/libs/colors';
 import { Fonts } from '@/libs/fonts';
-import { StyleSheet} from 'react-native';
+import { Pressable, StyleSheet} from 'react-native';
 import { Text, View } from "react-native";
-import Nav from './nav';
 import { useAccountProvider } from '@/contexts/accountContext';
+import Nav from './dashboardNav';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { useRouter } from 'expo-router';
+import { useNavProvider } from '@/contexts/navContext';
 
 export default function Header() {
+    const {setOption} = useNavProvider(); 
     const {account} = useAccountProvider();
+    const router = useRouter();
+
+    const onPressLogout = () => {
+      setOption('home')
+      router.navigate('/')
+    }
+
     return (
       <View style={styles.container}>
         <View style={styles.account}>
+          <View style={styles.exit}>
             <Text style={styles.accountText}>{account.name}</Text>
+            <Pressable onPress={() => onPressLogout()}>
+                  <Ionicons name="exit-outline" size={25} color={Colors.tertiary.medium} />
+            </Pressable> 
+          </View>
          </View>
          <Nav/>
       </View>
@@ -36,4 +52,8 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: Fonts.size.small,
   },
+  exit: {
+    flexDirection: 'row',
+    gap: 12
+  }
 });

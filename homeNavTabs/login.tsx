@@ -4,9 +4,16 @@ import ButtonApp from '@/components/button';
 import { useNavProvider } from '@/contexts/navContext';
 import { Fonts } from '@/libs/fonts';
 import { Colors } from '@/libs/colors';
+import { useRouter } from 'expo-router';
 
 export default function Login() {
   const {setOption} = useNavProvider(); 
+  const router = useRouter()
+
+  const onCLickLogin = () => {
+    setOption('home')
+    router.navigate('/dashboard')
+  }
 
     return (
       <View style={styles.body}>
@@ -33,7 +40,7 @@ export default function Login() {
 
           />
         </View>
-        <ButtonApp title={'Acessar'} type={'secondary'} onClick={() => setOption('home')}/>
+        <ButtonApp title={'Acessar'} type={'secondary'} onClick={() => onCLickLogin()}/>
       </View>
     )
 }
