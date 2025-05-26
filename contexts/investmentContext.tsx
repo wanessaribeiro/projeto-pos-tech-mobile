@@ -49,10 +49,10 @@ export function InvestmentProvider({
   }
 
   const newInvestment = (type: string, newInvestment: number) => {
-    if(type === 'Fundos de investimento') newInvestmentFunds(newInvestment);
-      else if (type === 'Tesouro direto') newTreasure(newInvestment);
-      else if (type === 'Previdência privada') newPrivatePrevidence(newInvestment);
-      else if (type === 'Bolsa de valores') newStocks(newInvestment);
+    if(type === 'investmentFunds') newInvestmentFunds(newInvestment);
+      else if (type === 'treasure') newTreasure(newInvestment);
+      else if (type === 'privatePrevidence') newPrivatePrevidence(newInvestment);
+      else if (type === 'stocks') newStocks(newInvestment);
 
     const total = totalInvestment + newInvestment;
     setTotalInvestment(total);

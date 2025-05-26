@@ -4,9 +4,16 @@ import ButtonApp from '@/components/button';
 import { useNavProvider } from '@/contexts/navContext';
 import { Fonts } from '@/libs/fonts';
 import { Colors } from '@/libs/colors';
+import { useRouter } from 'expo-router';
 
 export default function CreateAccount() {
-  const {setOption} = useNavProvider(); 
+    const {setOption} = useNavProvider(); 
+    const router = useRouter()
+  
+    const onClickCreateAccount = () => {
+      setOption('home')
+      router.navigate('/dashboard')
+    }
 
     return (
       <View style={styles.body}>
@@ -42,7 +49,7 @@ export default function CreateAccount() {
 
           />
         </View>
-        <ButtonApp title={'Criar conta'} type={'tertiary'} onClick={() => setOption('home')}/>
+        <ButtonApp title={'Criar conta'} type={'tertiary'} onClick={() => onClickCreateAccount()}/>
       </View>
     )
 }

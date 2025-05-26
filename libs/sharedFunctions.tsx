@@ -6,3 +6,7 @@ export const formatDate = (date: Date) => {
     const yearF = date.getFullYear();
     return dayF+"/"+monthF+"/"+yearF;
   }
+
+  export function percentageValue(percentage: number, totalValue: number) {
+    return (totalValue * percentage) / 100;
+ } 

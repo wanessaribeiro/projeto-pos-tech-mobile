@@ -12,6 +12,7 @@ import OtherServices from '@/dashboardNavTabs/others';
 import Transferences from '@/dashboardNavTabs/transferences';
 import { useNavigation } from 'expo-router';
 import { useEffect } from 'react';
+import NewInvestment from '@/dashboardNavTabs/newInvestment';
 
 export default function Dashboard() {
   const navigation = useNavigation();
@@ -24,6 +25,7 @@ export default function Dashboard() {
       'home': <NewTransaction/>,
       'transferences': <Transferences/>,
       'investments': <Investments/>,
+      'new-investment': <NewInvestment/>,
       'others': <OtherServices/>,
       'invoices' : <Invoices/>,
       'edit': <EditTransaction/>
@@ -32,9 +34,9 @@ export default function Dashboard() {
     return (
         <View style={styles.container}>
             <Header/>
-            {option == 'invoices' ? 
+            {option == 'invoices' ||  option =='investments' ? 
             (<>
-              {menuContent['invoices']}
+              {menuContent[option]}
               </>) : 
             (<>
               <Balance/>
