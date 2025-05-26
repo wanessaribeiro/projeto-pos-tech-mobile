@@ -24,6 +24,7 @@ export function AuthProvider ({
         type: '',
         name: '',
         balance: 0,
+        phone: '-'
     });
     const [token, setToken] = useState(localStorage.getItem("biteBankId") || "");
     
@@ -44,6 +45,7 @@ export function AuthProvider ({
         type: '',
         name: '',
         balance: 0,
+        phone: '-'
     });
       setToken("");
       localStorage.removeItem("biteBankId");

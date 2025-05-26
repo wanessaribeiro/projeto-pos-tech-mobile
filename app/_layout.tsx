@@ -1,4 +1,5 @@
 import { AccountProvider } from '@/contexts/accountContext';
+import { AuthProvider } from '@/contexts/authContext';
 import { InvestmentProvider } from '@/contexts/investmentContext';
 import { InvoiceProvider } from '@/contexts/invoiceContext';
 import { NavProvider } from '@/contexts/navContext';
@@ -7,6 +8,7 @@ import { Stack } from 'expo-router';
 
 export default function Layout() {
   return (
+      <AuthProvider>
           <AccountProvider>
             <NavProvider>
               <InvoiceProvider>                
@@ -20,5 +22,6 @@ export default function Layout() {
               </InvoiceProvider>
             </NavProvider>
           </AccountProvider>
+        </AuthProvider>
   );
 }

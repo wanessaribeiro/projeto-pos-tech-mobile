@@ -22,7 +22,9 @@ export default function Header() {
       <View style={styles.container}>
         <View style={styles.account}>
           <View style={styles.exit}>
+          <Pressable onPress={() => setOption('account')}> 
             <Text style={styles.accountText}>{account.name}</Text>
+          </Pressable>
             <Pressable onPress={() => onPressLogout()}>
                   <Ionicons name="exit-outline" size={25} color={Colors.tertiary.medium} />
             </Pressable> 

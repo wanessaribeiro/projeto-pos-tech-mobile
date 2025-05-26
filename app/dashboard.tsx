@@ -13,6 +13,7 @@ import Transferences from '@/dashboardNavTabs/transferences';
 import { useNavigation } from 'expo-router';
 import { useEffect } from 'react';
 import NewInvestment from '@/dashboardNavTabs/newInvestment';
+import AccountScreen from '@/dashboardNavTabs/accountScreen';
 
 export default function Dashboard() {
   const navigation = useNavigation();
@@ -28,13 +29,14 @@ export default function Dashboard() {
       'new-investment': <NewInvestment/>,
       'others': <OtherServices/>,
       'invoices' : <Invoices/>,
-      'edit': <EditTransaction/>
+      'edit': <EditTransaction/>,
+      'account': <AccountScreen/>
   }
 
     return (
         <View style={styles.container}>
             <Header/>
-            {option == 'invoices' ||  option =='investments' ? 
+            {option == 'invoices' ||  option =='investments' || option =='account' ? 
             (<>
               {menuContent[option]}
               </>) : 

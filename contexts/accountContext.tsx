@@ -7,6 +7,7 @@ export interface AccountType {
   type: string;
   name: string;
   balance: number;
+  phone: string;
 }
 
 export const accountMock: AccountType ={
@@ -16,6 +17,7 @@ export const accountMock: AccountType ={
     type: 'Conta Corrente',
     name: 'Joana Naves',
     balance: 2500,
+    phone: '(67) 91234-1234',
 }
 
 

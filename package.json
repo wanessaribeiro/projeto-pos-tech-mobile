@@ -46,6 +46,7 @@
     "react-native-uuid": "^2.0.3",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
+    "sync-storage": "^0.4.2",
     "uuid": "^11.1.0"
   },
   "devDependencies": {
