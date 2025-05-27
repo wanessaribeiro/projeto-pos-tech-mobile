@@ -17,7 +17,7 @@ export default function NewTransaction() {
   const {balance, setBalance} = useAccountProvider();
   const {usePostTransference} = useTransferenceProvider();
   const [newInvoice, setNewInvoice] = useState<InvoiceType>({
-    id: uuid.v4(), //TODO: voltar aleatorio aqui
+    id: uuid.v4(), 
     type: "pix",
     value: 0,
     date: new Date(),
@@ -77,7 +77,6 @@ export default function NewTransaction() {
             onChangeText={onChangeValue}
             value={String(newInvoice.value)}
             placeholder="00,00"
-            keyboardType="numeric"
 
           />
             <ButtonApp title='Concluir Transação' type='primary' onClick={() => createInvoice()}/>

@@ -71,7 +71,6 @@ export default function EditTransaction() {
             onChangeText={onChangeValue}
             value={String(editInvoice.value)}
             placeholder="00,00"
-            keyboardType="numeric"
 
           />
             <ButtonApp title='Concluir Edição' type='primary' onClick={() => updateInvoice()}/>

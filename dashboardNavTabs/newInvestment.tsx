@@ -57,7 +57,6 @@ export default function NewInvestment() {
             onChangeText={onChangeValue}
             value={String(addNewInvestment.value)}
             placeholder="00,00"
-            keyboardType="numeric"
 
           />
             <ButtonApp title='Fazer Investimento' type='primary' onClick={() => onClickAddNewInvestment()}/>
