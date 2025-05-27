@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { accountMock, AccountType } from "./accountContext";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export interface AuthType {
   email: string;
@@ -7,7 +8,6 @@ export interface AuthType {
 }
 
 const AuthContext = createContext<{
-  token: string,
   user: AccountType, 
   loginAction: () => void, 
   logOut: () => void, 
@@ -26,18 +26,16 @@ export function AuthProvider ({
         balance: 0,
         phone: '-'
     });
-    const [token, setToken] = useState(localStorage.getItem("biteBankId") || "");
     
-    const loginAction =  () => {
+    const loginAction =  async () => {
         const response = accountMock;
-        localStorage.setItem("biteBankId", response.id);
+        await AsyncStorage.setItem("biteBankId", response.id);
         
         setUser(response)
-        setToken(response.id)
         return;
     };
   
-    const logOut = () => {
+    const logOut = async () => {
       setUser({
         id: '0',
         email: "",
@@ -47,14 +45,12 @@ export function AuthProvider ({
         balance: 0,
         phone: '-'
     });
-      setToken("");
-      localStorage.removeItem("biteBankId");
+      await AsyncStorage.removeItem("biteBankId");
     };
   
     return (
       <AuthContext.Provider 
         value={{ 
-            token, 
             user, 
             loginAction, 
             logOut 

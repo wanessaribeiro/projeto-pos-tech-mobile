@@ -5,14 +5,25 @@ import { useNavProvider } from '@/contexts/navContext';
 import { Fonts } from '@/libs/fonts';
 import { Colors } from '@/libs/colors';
 import { useRouter } from 'expo-router';
+import { useState } from 'react';
 
 export default function Login() {
   const {setOption} = useNavProvider(); 
-  const router = useRouter()
+  const router = useRouter();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-  const onCLickLogin = () => {
+  const onClickLogin = () => {
     setOption('home')
     router.navigate('/dashboard')
+  }
+
+  const onChangeEmail = (value: string) => {
+    setEmail(value)
+  }
+
+  const onChangePassword = (value: string) => {
+    setPassword(value)
   }
 
     return (
@@ -24,23 +35,23 @@ export default function Login() {
           <Text style={styles.text}> Email</Text>
           <TextInput
             style={styles.input}
-            onChangeText={() => {}}
-            value={''}
+            onChangeText={onChangeEmail}
+            value={email}
             placeholder="Digite seu email"
             keyboardType="email-address"
-
+            autoComplete='email'
+            
           />
           <Text style={styles.text}>Senha</Text>
           <TextInput
             style={styles.input}
-            onChangeText={() => {}}
-            value={''}
+            onChangeText={onChangePassword}
+            value={password}
             placeholder="Digite sua senha"
-            keyboardType="visible-password"
-
+            secureTextEntry
           />
         </View>
-        <ButtonApp title={'Acessar'} type={'secondary'} onClick={() => onCLickLogin()}/>
+        <ButtonApp title={'Acessar'} type={'secondary'} onClick={() => onClickLogin()}/>
       </View>
     )
 }
@@ -78,7 +89,7 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: 'white',
-    color: Colors.gray.medium,
+    color: Colors.gray.dark,
     fontSize: Fonts.size.small,
     width: '100%',
     height: 48,

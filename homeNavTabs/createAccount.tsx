@@ -5,14 +5,30 @@ import { useNavProvider } from '@/contexts/navContext';
 import { Fonts } from '@/libs/fonts';
 import { Colors } from '@/libs/colors';
 import { useRouter } from 'expo-router';
+import { useState } from 'react';
 
 export default function CreateAccount() {
     const {setOption} = useNavProvider(); 
     const router = useRouter()
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
   
     const onClickCreateAccount = () => {
       setOption('home')
       router.navigate('/dashboard')
+    }
+
+    const onChangeName = (value: string) => {
+      setName(value)
+    }
+
+    const onChangeEmail = (value: string) => {
+      setEmail(value)
+    }
+  
+    const onChangePassword = (value: string) => {
+      setPassword(value)
     }
 
     return (
@@ -24,8 +40,8 @@ export default function CreateAccount() {
         <Text style={styles.text}> Nome</Text>
           <TextInput
             style={styles.input}
-            onChangeText={() => {}}
-            value={''}
+            onChangeText={onChangeName}
+            value={name}
             placeholder="Digite seu nome completo"
             keyboardType="default"
 
@@ -33,8 +49,8 @@ export default function CreateAccount() {
           <Text style={styles.text}> Email</Text>
           <TextInput
             style={styles.input}
-            onChangeText={() => {}}
-            value={''}
+            onChangeText={onChangeEmail}
+            value={email}
             placeholder="Digite seu email"
             keyboardType="email-address"
 
@@ -42,8 +58,8 @@ export default function CreateAccount() {
           <Text style={styles.text}>Senha</Text>
           <TextInput
             style={styles.input}
-            onChangeText={() => {}}
-            value={''}
+            onChangeText={onChangePassword}
+            value={password}
             placeholder="Digite sua senha"
             keyboardType="visible-password"
 

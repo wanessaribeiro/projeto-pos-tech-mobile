@@ -18,7 +18,7 @@ export default function Home() {
     useEffect(() => {
       navigation.setOptions({ headerShown: false });
     }, [navigation]);
-    
+     
   const {option} = useNavProvider();
   const menuContent: {[key: string]: React.JSX.Element} = {
       'home': <HomeScreen/>,
