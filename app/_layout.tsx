@@ -8,7 +8,6 @@ import { Stack } from 'expo-router';
 
 export default function Layout() {
   return (
-      <AuthProvider>
           <AccountProvider>
             <NavProvider>
               <InvoiceProvider>                
@@ -22,6 +21,5 @@ export default function Layout() {
               </InvoiceProvider>
             </NavProvider>
           </AccountProvider>
-        </AuthProvider>
   );
 }

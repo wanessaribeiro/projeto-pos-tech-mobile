@@ -23,7 +23,7 @@ export const accountMock: AccountType ={
 
 const AccountContext = createContext<{
   account: AccountType,
-  balance: number | undefined,
+  balance: number,
   setBalance: Dispatch<SetStateAction<number>>,
 } | undefined>(undefined);
     
@@ -32,7 +32,7 @@ export function AccountProvider({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const [account, setAccount] = useState(accountMock);
-  const [balance, setBalance] = useState(accountMock.balance);
+  const [balance, setBalance] = useState(accountMock.balance || 0);
 
   useEffect(() => {
     setAccount({...account, balance: balance})

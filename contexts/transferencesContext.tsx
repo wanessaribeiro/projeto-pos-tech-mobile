@@ -4,7 +4,7 @@ import { createContext, Dispatch, SetStateAction, useContext, useState } from "r
 const transferencesMock: InvoiceType[] = [
   {
     id: "3",
-    type: "Pix",
+    type: "pix",
     value: 250.0,
     date: new Date(
       "Sat Jun 01 2024 16:24:42 GMT-0300 (Hora padrão de Brasília)"
@@ -12,7 +12,7 @@ const transferencesMock: InvoiceType[] = [
   },
   {
     id: "2",
-    type: "DOC/TED",
+    type: "docTed",
     value: 300.0,
     date: new Date(
       "Mon Apr 08 2024 16:24:42 GMT-0300 (Hora padrão de Brasília)"
@@ -20,7 +20,7 @@ const transferencesMock: InvoiceType[] = [
   },
   {
     id: "5",
-    type: "Pix",
+    type: "pix",
     value: 250.0,
     date: new Date(
       "Sat Jun 01 2024 16:24:42 GMT-0300 (Hora padrão de Brasília)"
@@ -28,7 +28,7 @@ const transferencesMock: InvoiceType[] = [
   },
   {
     id: "6",
-    type: "DOC/TED",
+    type: "docTed",
     value: 300.0,
     date: new Date(
       "Mon Apr 08 2024 16:24:42 GMT-0300 (Hora padrão de Brasília)"
@@ -36,7 +36,7 @@ const transferencesMock: InvoiceType[] = [
   },
   {
     id: "1",
-    type: "Pix",
+    type: "pix",
     value: 250.0,
     date: new Date(
       "Sat Jun 01 2024 16:24:42 GMT-0300 (Hora padrão de Brasília)"
@@ -44,7 +44,7 @@ const transferencesMock: InvoiceType[] = [
   },
   {
     id: "4",
-    type: "DOC/TED",
+    type: "docTed",
     value: 300.0,
     date: new Date(
       "Mon Apr 08 2024 16:24:42 GMT-0300 (Hora padrão de Brasília)"
@@ -52,7 +52,7 @@ const transferencesMock: InvoiceType[] = [
   },
   {
     id: "9",
-    type: "Pix",
+    type: "pix",
     value: 250.0,
     date: new Date(
       "Sat Jun 01 2024 16:24:42 GMT-0300 (Hora padrão de Brasília)"
@@ -60,7 +60,7 @@ const transferencesMock: InvoiceType[] = [
   },
   {
     id: "20",
-    type: "DOC/TED",
+    type: "docTed",
     value: 300.0,
     date: new Date(
       "Mon Apr 08 2024 16:24:42 GMT-0300 (Hora padrão de Brasília)"

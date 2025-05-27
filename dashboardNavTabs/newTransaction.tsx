@@ -23,7 +23,7 @@ export default function NewTransaction() {
     date: new Date(),
   });
 
-  const onChangeType = (value) => {
+  const onChangeType = (value: any) => {
     setNewInvoice((prev) => ({ ...prev, type: value }));
   };
 

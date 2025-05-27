@@ -10,14 +10,16 @@ import React, { useState } from 'react';
 import { Image, StyleSheet, TextInput} from 'react-native';
 import { Text, View } from "react-native";
 import { useNavProvider } from '@/contexts/navContext';
+import { useAccountProvider } from '@/contexts/accountContext';
 
 export default function EditTransaction() {
   const {setOption} = useNavProvider();
   const {selectedInvoice, usePatchInvoice} = useInvoiceProvider();
+  const {balance, setBalance} = useAccountProvider();
   const {usePostTransference} = useTransferenceProvider();
   const [editInvoice, setEditInvoice] = useState<InvoiceType>(selectedInvoice);
 
-  const onChangeType = (value) => {
+  const onChangeType = (value: any) => {
     setEditInvoice((prev) => ({ ...prev, type: value }));
   };
 
@@ -25,6 +27,16 @@ export default function EditTransaction() {
     if (!isNaN(Number(value))) {
       setEditInvoice((prev) => ({ ...prev, value: Number(value) }));
     }
+  };
+
+  const setNewBalance = (invoice: InvoiceType, selectedInvoice: InvoiceType) => {
+    const currentBalance = balance;
+
+    if (selectedInvoice.type === "deposit") setBalance(currentBalance - invoice.value)
+    else if (selectedInvoice.type === "withdraw" || selectedInvoice.type === "docTed" || selectedInvoice.type === "pix") setBalance(currentBalance + invoice.value);
+    
+    if (invoice.type === "deposit") setBalance(currentBalance + invoice.value)
+    else if (invoice.type === "withdraw" || invoice.type === "docTed" || invoice.type === "pix") setBalance(currentBalance - invoice.value);
   };
 
   const updateInvoice = () => {
@@ -35,6 +47,7 @@ export default function EditTransaction() {
     if (editInvoice.type === "docTed" || editInvoice.type === "pix") {
       usePostTransference(editInvoice);
     }
+    setNewBalance(editInvoice, selectedInvoice)
     usePatchInvoice(editInvoice);
     setOption('home');
   };

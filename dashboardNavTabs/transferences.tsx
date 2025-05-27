@@ -1,5 +1,6 @@
 import { useTransferenceProvider } from '@/contexts/transferencesContext';
 import { Colors } from '@/libs/colors';
+import { transactionTypes } from '@/libs/enums';
 import { Fonts } from '@/libs/fonts';
 import { formatDate } from '@/libs/sharedFunctions';
 import { containers, imagePlacement } from '@/libs/styles';
@@ -23,7 +24,7 @@ export default function Transferences() {
                 </View>
                 {transferences?.map((transference) => (
                  <View style={styles.transferenceRow} key={transference.id}>
-                    <Text style={styles.transferenceText}>{transference.type}</Text>
+                    <Text style={styles.transferenceText}>{transactionTypes[transference.type]}</Text>
                     <Text style={styles.transferenceText}>{transference.value}</Text>
                     <Text style={styles.transferenceText}>{formatDate(transference.date)}</Text>
                   </View>                   

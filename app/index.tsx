@@ -22,6 +22,7 @@ export default function Home() {
   const {option} = useNavProvider();
   const menuContent: {[key: string]: React.JSX.Element} = {
       'home': <HomeScreen/>,
+      'home-screen': <HomeScreen/>,
       'login': <Login/>,
       'create-account': <CreateAccount/>,
       'about': <ErrorScreen/>,
